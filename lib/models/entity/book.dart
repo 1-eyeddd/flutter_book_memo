@@ -15,7 +15,7 @@ class Book {
     return Book(
       bookId: json['id'],
       title: json['title'],
-      imageUrl: json['imageurl'],
+      imageUrl: json['imageUrl'],
     );
   }
 }
