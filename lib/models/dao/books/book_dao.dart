@@ -33,7 +33,7 @@ abstract class BookDao {
     await documentReference.set({
       'bookId': documentReference.id,
       'title': title,
-      'imageurl': imageUrl,
+      'imageUrl': imageUrl,
     });
   }
 
