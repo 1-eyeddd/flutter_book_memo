@@ -24,15 +24,17 @@ dependencies:
   flutter_local_notifications: ^4.0.1+2
   flutter_native_timezone: ^1.0.4
 
-  # TODO
-  # flutter_dotenv: ^3.1.0
-  # firebase_core: ^1.0.2
-  # cloud_firestore: ^1.0.2
-  # provider: ^5.0.0
+  # For Architecture
+  provider: ^4.3.2+3
+  flutter_state_notifier: ^0.6.1
+  freezed_annotation: ^0.12.0
+  state_notifier: ^0.6.0
 
-dev_dependencies:
+  dev_dependencies:
   flutter_test:
     sdk: flutter
+
+    freezed: ^0.12.6
 
 flutter:
   uses-material-design: true
