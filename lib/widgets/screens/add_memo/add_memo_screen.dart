@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/models/dao/memos/memo_dao.dart';
+import 'package:provider/provider.dart';
+import 'add_memo_view_model.dart';
 
 class AddMemoScreen extends StatelessWidget {
   final String bookId;
@@ -7,15 +8,24 @@ class AddMemoScreen extends StatelessWidget {
   AddMemoScreen({Key key, @required this.bookId, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // TODO: コントローラーをViewModelにかく
     var _textController = TextEditingController();
     return Scaffold(
-      appBar:
-          AppBar(backgroundColor: Colors.brown.shade300, title: Text('メモを追加')),
+      appBar: AppBar(
+        backgroundColor: Colors.brown.shade300,
+        title: Text(
+          'メモを追加',
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 14.0, right: 14, left: 14),
+              padding: const EdgeInsets.only(
+                top: 14.0,
+                right: 14,
+                left: 14,
+              ),
               child: Container(
                 height: 450,
                 child: TextField(
@@ -31,7 +41,10 @@ class AddMemoScreen extends StatelessWidget {
             ),
             Text(
               '24時間後にメモがリマインドされます！',
-              style: TextStyle(fontSize: 15, color: Colors.blueGrey.shade400),
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.blueGrey.shade400,
+              ),
             ),
             Container(
               child: Padding(
@@ -42,13 +55,15 @@ class AddMemoScreen extends StatelessWidget {
                     onPrimary: Colors.white,
                   ),
                   child: const Text('メモを追加する'),
-                  onPressed: () async {
-                    await MemoDao.addMemo(
-                        bookId: bookId, memo: _textController.text);
-                    await MemoDao.scheduleAlarm(
-                        memo: _textController.text, title: title);
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => Provider.of<AddMemoViewModel>(
+                    context,
+                    listen: false,
+                  ).onPressedAddMemo(
+                    context: context,
+                    bookId: bookId,
+                    memo: _textController.text,
+                    title: title,
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../models/dao/books/book_dao.dart';
+import 'package:flutter_portfolio/widgets/screens/add_book/add_book_view_model.dart';
+import 'package:provider/provider.dart';
 
 class AddBookScreen extends StatefulWidget {
   AddBookScreen({Key key}) : super(key: key);
@@ -15,8 +15,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _textController = TextEditingController();
-    var _urlController = TextEditingController();
+    final _textController = TextEditingController();
+    final _urlController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.brown.shade300,
@@ -41,12 +41,12 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         filled: true,
                         errorStyle: TextStyle(fontSize: 15),
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return '本の名前を入力してください';
-                        }
-                        return null;
-                      },
+                      validator: (text) =>
+                          Provider.of<AddBookViewModel>(context, listen: false)
+                              .createValidatorText(
+                        inputText: text,
+                        type: AddBookTextFieldValidateType.title,
+                      ),
                     ),
                   ),
                   Container(
@@ -59,24 +59,26 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         filled: true,
                         errorStyle: TextStyle(fontSize: 15),
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return '本の写真のURLを入力してください';
-                        }
-                        return null;
-                      },
+                      validator: (text) =>
+                          Provider.of<AddBookViewModel>(context, listen: false)
+                              .createValidatorText(
+                        inputText: text,
+                        type: AddBookTextFieldValidateType.imageUrl,
+                      ),
                     ),
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: () async {
+                      onPressed: () {
                         final isValue = _formkey.currentState.validate();
                         if (isValue) {
-                          await BookDao.addBook(
-                              title: _textController.text,
-                              imageUrl: _urlController.text);
-                          Navigator.pop(context);
+                          Provider.of<AddBookViewModel>(context, listen: false)
+                              .onPressdAddBook(
+                            context: context,
+                            title: _textController.text,
+                            imageUrl: _urlController.text,
+                          );
                         } else {
                           setState(
                             () {
