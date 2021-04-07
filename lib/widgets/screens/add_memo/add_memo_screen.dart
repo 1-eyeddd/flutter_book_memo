@@ -9,7 +9,7 @@ class AddMemoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: コントローラーをViewModelにかく
-    var _textController = TextEditingController();
+    final _textController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.brown.shade300,

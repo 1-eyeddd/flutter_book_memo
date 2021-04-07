@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/models/dao/books/book_dao.dart';
 import 'package:flutter_portfolio/models/dao/memos/memo_dao.dart';
 import 'package:flutter_portfolio/models/entity/memo.dart';
 import 'package:flutter_portfolio/widgets/screens/add_memo/add_memo_screen.dart';
@@ -33,6 +34,17 @@ class MemoListViewModel extends ChangeNotifier {
       _memoList = memoList;
       notifyListeners();
     });
+  }
+
+  //本を削除
+  void onPressdDeleteBook({
+    @required BuildContext context,
+    @required String bookId,
+  }) {
+    BookDao.deleteBook(
+      bookId: bookId,
+    );
+    Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
   //メモをタップ

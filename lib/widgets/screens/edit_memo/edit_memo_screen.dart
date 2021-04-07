@@ -17,7 +17,7 @@ class EditMemoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO:
+    // TODO:viewに書きたい
     final _textController = TextEditingController();
     _textController.text = memo;
     return Scaffold(

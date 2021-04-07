@@ -27,7 +27,40 @@ class _MemoListScreenState extends State<MemoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(widget.title), backgroundColor: Colors.brown.shade300),
+        title: Text(widget.title),
+        backgroundColor: Colors.brown.shade300,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('確認'),
+                    content: Text('この本を本当に削除しますか？'),
+                    actions: <Widget>[
+                      TextButton(
+                          child: Text('Cancel'),
+                          onPressed: () => Navigator.of(context).pop(0)),
+                      TextButton(
+                        child: Text('OK'),
+                        onPressed: () => Provider.of<MemoListViewModel>(
+                          context,
+                          listen: false,
+                        ).onPressdDeleteBook(
+                          context: context,
+                          bookId: widget.bookId,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: Consumer<MemoListViewModel>(
         builder: (BuildContext context, MemoListViewModel value, Widget child) {
           final memoList = value.memoList;

@@ -15,7 +15,7 @@ class EditMemoViewModel extends ChangeNotifier {
       bookId: bookId,
       newMemo: newMemo,
     );
-    // TODO: せつめい
+    //メモ一覧に戻るため
     Navigator.of(context).pop();
     Navigator.of(context).pop();
   }

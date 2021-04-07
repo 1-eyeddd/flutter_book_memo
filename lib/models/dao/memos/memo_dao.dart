@@ -28,33 +28,6 @@ abstract class MemoDao {
         .snapshots();
   }
 
-  // static Future<List<Memo>> getBookMemos({
-  //   @required String bookId,
-  // }) async {
-  //   final querySnapshot = await FirebaseFirestore.instance
-  //       .collection('books')
-  //       .doc(bookId)
-  //       .collection('bookMemos')
-  //       .get();
-  //   final memoList = querySnapshot.docs.map((document) {
-  //     final data = document.data();
-
-  //     final bookId = data['bookId'] as String ?? '';
-  //     final memoId = data['memoId'] as String ?? '';
-  //     final memo = data['memo'] as String ?? '';
-  //     final createdAt = data['createdAt'] as Timestamp;
-
-  //     final memos = Memo(
-  //       bookId: bookId,
-  //       memoId: memoId,
-  //       memo: memo,
-  //       createdAt: createdAt,
-  //     );
-  //     return memos;
-  //   }).toList();
-  //   return memoList;
-  // }
-
   //メモを表示
   static Future<Memo> getMemo({
     @required String bookId,

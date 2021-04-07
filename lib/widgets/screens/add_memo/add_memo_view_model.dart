@@ -4,7 +4,7 @@ import 'package:flutter_portfolio/models/dao/memos/memo_dao.dart';
 import 'package:flutter_portfolio/util/local_notification.dart';
 
 class AddMemoViewModel extends ChangeNotifier {
-  // 更新ボタンをタップ
+  //追加ボタンをタップ
   void onPressedAddMemo({
     @required BuildContext context,
     @required String bookId,
@@ -19,8 +19,6 @@ class AddMemoViewModel extends ChangeNotifier {
       memo: memo,
       title: title,
     );
-    // TODO: なぜpop()を二回書いてるか書く
-    Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
 
