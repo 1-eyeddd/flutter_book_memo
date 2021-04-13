@@ -24,7 +24,7 @@ class _MemoDetailScreenState extends State<MemoDetailScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<MemoDetailViewModel>(context, listen: false).memosListenr(
+    Provider.of<MemoDetailViewModel>(context, listen: false).memosListener(
       bookId: widget.bookId,
       memoId: widget.memoId,
     );

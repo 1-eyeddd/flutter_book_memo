@@ -8,8 +8,6 @@ class AddMemoScreen extends StatelessWidget {
   AddMemoScreen({Key key, @required this.bookId, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: コントローラーをViewModelにかく
-    final _textController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,7 +28,8 @@ class AddMemoScreen extends StatelessWidget {
                 child: TextField(
                   maxLength: 600,
                   maxLines: 20,
-                  controller: _textController,
+                  controller:
+                      Provider.of<AddMemoViewModel>(context).textController,
                   decoration: InputDecoration(
                     hintText: 'メモしてみましょう',
                     border: OutlineInputBorder(),
@@ -59,7 +58,6 @@ class AddMemoScreen extends StatelessWidget {
                   ).onPressedAddMemo(
                     context: context,
                     bookId: bookId,
-                    memo: _textController.text,
                     title: title,
                   ),
                 ),

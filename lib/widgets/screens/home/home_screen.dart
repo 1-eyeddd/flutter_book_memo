@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,6 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context, HomeViewModel value, Widget child) {
           // ViewModelのstateにアクセス
           final books = value.books;
+          if (books.isEmpty)
+            return Padding(
+              padding: const EdgeInsets.only(top: 150.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    Icon(Icons.auto_stories,
+                        size: 160, color: Colors.blueGrey.shade100),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        'まだ本は登録されていません。',
+                        style: TextStyle(
+                            fontSize: 17, color: Colors.blueGrey.shade200),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
           return Container(
             child: GridView.count(
               padding: EdgeInsets.all(15.0),

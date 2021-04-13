@@ -14,6 +14,8 @@ class SignInViewModel extends ChangeNotifier {
       email: emailController.text,
       password: passwordController.text,
     );
+    emailController.text = '';
+    passwordController.text = '';
   }
 
   //新規登録画面に遷移

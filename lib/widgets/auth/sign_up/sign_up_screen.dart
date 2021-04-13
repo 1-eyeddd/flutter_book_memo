@@ -27,13 +27,41 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 30.0),
+            padding: const EdgeInsets.only(top: 20.0),
             child: Container(
               child: Image.asset('images/sign_up.png'),
             ),
           ),
           SizedBox(
-            height: 30,
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32),
+            child: Material(
+              elevation: 2.0,
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              child: TextFormField(
+                controller:
+                    Provider.of<SignUpViewModel>(context).nameController,
+                decoration: InputDecoration(
+                  hintText: "プロフィール名",
+                  prefixIcon: Material(
+                    elevation: 0,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    child: Icon(
+                      Icons.account_circle_rounded,
+                      color: Colors.lightBlue,
+                    ),
+                  ),
+                  border: InputBorder.none,
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 25, vertical: 13),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),

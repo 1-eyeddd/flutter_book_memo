@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/dao/books/book_dao.dart';
+import 'package:flutter_portfolio/models/service/user_service.dart';
 
 enum AddBookTextFieldValidateType {
   imageUrl,
@@ -13,7 +14,9 @@ class AddBookViewModel extends ChangeNotifier {
     @required String title,
     @required String imageUrl,
   }) {
+    final user = UserService.getUserInfo().uid;
     BookDao.addBook(
+      userId: user,
       title: title,
       imageUrl: imageUrl,
     );

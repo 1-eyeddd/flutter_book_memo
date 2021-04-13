@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/widgets/screens/edit_memo/edit_memo_view_model.dart';
 import 'package:provider/provider.dart';
 
-class EditMemoScreen extends StatelessWidget {
+class EditMemoScreen extends StatefulWidget {
   final String bookId;
   final String memo;
   final String memoId;
@@ -16,10 +16,19 @@ class EditMemoScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _EditMemoScreenState createState() => _EditMemoScreenState();
+}
+
+class _EditMemoScreenState extends State<EditMemoScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<EditMemoViewModel>(context, listen: false).textController.text =
+        widget.memo;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO:viewに書きたい
-    final _textController = TextEditingController();
-    _textController.text = memo;
     return Scaffold(
       appBar: AppBar(
         title: Text('メモを編集'),
@@ -35,10 +44,11 @@ class EditMemoScreen extends StatelessWidget {
               ),
               child: Container(
                 height: 450,
-                child: TextField(
+                child: TextFormField(
                   maxLength: 600,
                   maxLines: 20,
-                  controller: _textController,
+                  controller:
+                      Provider.of<EditMemoViewModel>(context).textController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                   ),
@@ -64,9 +74,8 @@ class EditMemoScreen extends StatelessWidget {
                       Provider.of<EditMemoViewModel>(context, listen: false)
                           .onPressdEditMemo(
                     context: context,
-                    bookId: bookId,
-                    newMemo: _textController.text,
-                    memoId: memoId,
+                    bookId: widget.bookId,
+                    memoId: widget.memoId,
                   ),
                 ),
               ),

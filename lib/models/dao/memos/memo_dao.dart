@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/models/entity/memo.dart';
+import 'package:flutter_portfolio/models/service/user_service.dart';
 
 // 本ごとのメモ一覧を取得
 abstract class MemoDao {
@@ -28,39 +28,12 @@ abstract class MemoDao {
         .snapshots();
   }
 
-  //メモを表示
-  static Future<Memo> getMemo({
-    @required String bookId,
-    @required String memoId,
-  }) async {
-    final documentSnapshot = await FirebaseFirestore.instance
-        .collection('books')
-        .doc(bookId)
-        .collection('bookMemos')
-        .doc(memoId)
-        .get();
-
-    final data = documentSnapshot.data();
-
-    final bookIdData = data['bookId'] as String ?? '';
-    final memoIdData = data['memoId'] as String ?? '';
-    final memoData = data['memo'] as String ?? '';
-    final createdAtData = data['createdAt'] as Timestamp;
-
-    final memos = Memo(
-      bookId: bookIdData,
-      memoId: memoIdData,
-      memo: memoData,
-      createdAt: createdAtData,
-    );
-    return memos;
-  }
-
   //メモを追加
   static Future<void> addMemo({
     @required String bookId,
     @required String memo,
   }) async {
+    final user = UserService.getUserInfo().uid;
     final documentReference = FirebaseFirestore.instance
         .collection('books')
         .doc(bookId)
@@ -71,6 +44,7 @@ abstract class MemoDao {
       'createdAt': Timestamp.now(),
       'bookId': bookId,
       'memoId': documentReference.id,
+      'userId': user,
     });
   }
 

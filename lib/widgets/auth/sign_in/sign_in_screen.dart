@@ -85,6 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 25, vertical: 13),
                 ),
+                obscureText: true,
               ),
             ),
           ),

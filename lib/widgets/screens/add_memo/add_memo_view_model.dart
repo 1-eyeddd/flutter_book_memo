@@ -4,21 +4,22 @@ import 'package:flutter_portfolio/models/dao/memos/memo_dao.dart';
 import 'package:flutter_portfolio/util/local_notification.dart';
 
 class AddMemoViewModel extends ChangeNotifier {
+  final textController = TextEditingController();
   //追加ボタンをタップ
   void onPressedAddMemo({
     @required BuildContext context,
     @required String bookId,
-    @required String memo,
     @required String title,
   }) async {
     await MemoDao.addMemo(
       bookId: bookId,
-      memo: memo,
+      memo: textController.text,
     );
     await _scheduleAlarm(
-      memo: memo,
+      memo: textController.text,
       title: title,
     );
+    textController.text = '';
     Navigator.of(context).pop();
   }
 

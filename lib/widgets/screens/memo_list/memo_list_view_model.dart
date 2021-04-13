@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/dao/books/book_dao.dart';
 import 'package:flutter_portfolio/models/dao/memos/memo_dao.dart';
 import 'package:flutter_portfolio/models/entity/memo.dart';
+import 'package:flutter_portfolio/models/service/user_service.dart';
 import 'package:flutter_portfolio/widgets/screens/add_memo/add_memo_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_detail/memo_detail_screen.dart';
 
@@ -15,7 +16,10 @@ class MemoListViewModel extends ChangeNotifier {
   void memoListListener({
     @required String bookId,
   }) {
-    MemoDao.memosListener(bookId: bookId).listen((snapshot) {
+    final user = UserService.getUserInfo().uid;
+    MemoDao.memosListener(
+      bookId: bookId,
+    ).listen((snapshot) {
       final memoList = snapshot.docs.map((document) {
         final data = document.data();
         print(data);
@@ -27,6 +31,7 @@ class MemoListViewModel extends ChangeNotifier {
           bookId: bookId,
           memoId: memoId,
           memo: memo,
+          userId: user,
           createdAt: createdAt,
         );
         return memos;

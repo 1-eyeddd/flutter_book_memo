@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 
 abstract class UserService {
   //サインアップ
-  static Future<void> signUp({
+  static Future<UserCredential> signUp({
     @required String email,
     @required String password,
   }) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
-    await auth.createUserWithEmailAndPassword(
+    final userCredential = await auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    return userCredential;
   }
 
   //サインイン
@@ -28,5 +29,15 @@ abstract class UserService {
   //サインアウト
   static Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  //ユーザー情報を取得
+  static User getUserInfo() {
+    return FirebaseAuth.instance.currentUser;
+  }
+
+  //ログインチェック
+  static Stream<User> authStateChanges() {
+    return FirebaseAuth.instance.authStateChanges();
   }
 }
