@@ -14,10 +14,11 @@ class MyPageViewModel extends ChangeNotifier {
     @required BuildContext context,
   }) async {
     await FirebaseAuth.instance.signOut();
+    //ログイン画面に戻るためpop
     Navigator.of(context).pop();
   }
 
-  // ユーザー情報取得する
+  // ユーザー情報をauthから取得する
   void currentUserInfoListener() {
     var user = UserService.getUserInfo();
     if (user != null) {
@@ -28,15 +29,14 @@ class MyPageViewModel extends ChangeNotifier {
   Users _users;
 
   Users get users => _users;
+
   //ユーザー情報をfirestoreから取得
   void userNameListener() {
     final user = UserService.getUserInfo().uid;
     UserDao.userListener(userId: user).listen(
       (documentSnapshot) {
         final data = documentSnapshot.data();
-
         final userNameData = data['userName'] as String ?? '';
-
         final users = Users(
           userId: user,
           userName: userNameData,

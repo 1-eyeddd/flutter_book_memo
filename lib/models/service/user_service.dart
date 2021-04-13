@@ -31,7 +31,7 @@ abstract class UserService {
     await FirebaseAuth.instance.signOut();
   }
 
-  //ユーザー情報を取得
+  //Authからユーザー情報を取得
   static User getUserInfo() {
     return FirebaseAuth.instance.currentUser;
   }

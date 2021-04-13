@@ -8,7 +8,7 @@ enum AddBookTextFieldValidateType {
 }
 
 class AddBookViewModel extends ChangeNotifier {
-  //本追加
+  //タップして本が追加される
   void onPressdAddBook({
     @required BuildContext context,
     @required String title,

@@ -39,7 +39,7 @@ class MemoDetailViewModel extends ChangeNotifier {
     );
   }
 
-  //編集画面へ
+  //編集画面へ遷移
   void onTapEditMemoScreen({
     @required BuildContext context,
     @required String bookId,
@@ -60,7 +60,7 @@ class MemoDetailViewModel extends ChangeNotifier {
     );
   }
 
-  //削除
+  //メモを削除
   void onPressDeleteMemo({
     @required BuildContext context,
   }) {

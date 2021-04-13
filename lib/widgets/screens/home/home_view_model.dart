@@ -7,9 +7,6 @@ import 'package:flutter_portfolio/widgets/screens/memo_list/memo_list_screen.dar
 import 'package:flutter_portfolio/widgets/screens/my_page/my_page_screen.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  // 画面の状態
-  // その画面で用いる情報の情報の状態管理（State）
-  // ex: 本棚で表示される本のリストつまりList<Book>
   List<Book> _books = <Book>[];
 
   List<Book> get books => _books;
@@ -39,7 +36,7 @@ class HomeViewModel extends ChangeNotifier {
     });
   }
 
-// 画像をタップ
+// 本の画像をタップしてメモ一覧へ
   void onTapImage({
     @required BuildContext context,
     @required Book book,
@@ -55,7 +52,7 @@ class HomeViewModel extends ChangeNotifier {
     );
   }
 
-  // 追加ボタンをタップ
+  // 本追加画面へ遷移
   void onTapFloatingActionButton({
     @required BuildContext context,
   }) {

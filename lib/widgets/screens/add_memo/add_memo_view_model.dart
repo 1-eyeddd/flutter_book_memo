@@ -5,7 +5,8 @@ import 'package:flutter_portfolio/util/local_notification.dart';
 
 class AddMemoViewModel extends ChangeNotifier {
   final textController = TextEditingController();
-  //追加ボタンをタップ
+
+  //タップしてメモを追加
   void onPressedAddMemo({
     @required BuildContext context,
     @required String bookId,
@@ -23,6 +24,7 @@ class AddMemoViewModel extends ChangeNotifier {
     Navigator.of(context).pop();
   }
 
+  //追加したメモが通知されるようスケジューリング
   Future<void> _scheduleAlarm({
     @required String memo,
     @required String title,

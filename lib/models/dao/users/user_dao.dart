@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserDao {
-  //ユーザーをfirestoreに追加
+  //ユーザー情報をfirestoreに追加
   static Future<void> addUser({
     @required String userName,
     @required String uid,

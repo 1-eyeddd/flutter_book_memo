@@ -31,6 +31,7 @@ class LocalNotification extends ChangeNotifier {
     );
   }
 
+  //通知のスケジューリング
   static Future<void> scheduleAlarm({
     @required String memo,
     @required String title,
