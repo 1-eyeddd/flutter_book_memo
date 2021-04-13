@@ -50,7 +50,7 @@ class MyPageScreen extends StatelessWidget {
                 onPressed: () => Provider.of<MyPageViewModel>(
                   context,
                   listen: false,
-                ).onPressedLoginScreen(
+                ).onPressedSignOut(
                   context: context,
                 ),
               ),

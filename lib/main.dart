@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/util/local_notification.dart';
+import 'package:flutter_portfolio/widgets/auth/auth_check.dart';
+import 'package:flutter_portfolio/widgets/auth/sign_in/sign_in_view_model.dart';
+import 'package:flutter_portfolio/widgets/auth/sign_up/sign_up_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/add_book/add_book_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/add_memo/add_memo_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/edit_memo/edit_memo_view_model.dart';
-import 'package:flutter_portfolio/widgets/screens/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_portfolio/widgets/screens/home/home_view_model.dart';
-import 'package:flutter_portfolio/widgets/screens/login/login_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_detail/memo_detail_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_list/memo_list_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/my_page/my_page_view_model.dart';
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
             create: (_) => AddBookViewModel()),
         ChangeNotifierProvider<MyPageViewModel>(
             create: (_) => MyPageViewModel()),
-        ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider<SignInViewModel>(
+            create: (_) => SignInViewModel()),
+        ChangeNotifierProvider<SignUpViewModel>(
+            create: (_) => SignUpViewModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -46,7 +50,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomeScreen(),
+        home: AuthCheck(),
       ),
     );
   }

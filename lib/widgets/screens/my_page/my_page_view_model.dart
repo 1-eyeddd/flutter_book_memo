@@ -1,16 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/widgets/screens/login/login_screen.dart';
 
 class MyPageViewModel extends ChangeNotifier {
-  //ログイン画面へ
-  void onPressedLoginScreen({
+  //サインアウトする
+  Future<void> onPressedSignOut({
     @required BuildContext context,
-  }) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LoginScreen(),
-      ),
-    );
+  }) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pop();
   }
+
+  //ユーザー情報取得する
+  // static void currentUserInfoListener() {
+  //   var user = firebase.auth().currentUser;
+  //   var String email;
+
+  //   if (user != null) {
+  //     email = user.email;
+  //   }
+  // }
 }

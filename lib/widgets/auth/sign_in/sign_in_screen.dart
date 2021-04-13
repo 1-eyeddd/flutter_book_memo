@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/widgets/auth/sign_in/sign_in_view_model.dart';
 
-class SignUpScreen extends StatefulWidget {
+import 'package:provider/provider.dart';
+
+class SignInScreen extends StatefulWidget {
   @override
-  _SignUpScreenScreenState createState() => _SignUpScreenScreenState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _SignUpScreenScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text(
-                "アカウントを作成する",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 26.0,
-                ),
-              ),
-            ],
-          ),
           Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Container(
-              child: Image.asset('images/sign_up.png'),
+            padding: const EdgeInsets.only(top: 18),
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "Welcome!",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(
-            height: 30,
+          Container(
+            child: Image.asset('images/login_page.png'),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
@@ -39,7 +40,9 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
               elevation: 2.0,
               borderRadius: BorderRadius.all(Radius.circular(30)),
               child: TextField(
-                onChanged: (String value) {},
+                controller:
+                    Provider.of<SignInViewModel>(context).emailController,
+                cursorColor: Colors.deepOrange,
                 decoration: InputDecoration(
                   hintText: "Email",
                   prefixIcon: Material(
@@ -66,7 +69,8 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
               elevation: 2.0,
               borderRadius: BorderRadius.all(Radius.circular(30)),
               child: TextField(
-                onChanged: (String value) {},
+                controller:
+                    Provider.of<SignInViewModel>(context).passwordController,
                 decoration: InputDecoration(
                   hintText: "Password",
                   prefixIcon: Material(
@@ -85,7 +89,7 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 25,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
@@ -94,18 +98,54 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                   color: Colors.lightBlue),
               child: FlatButton(
-                minWidth: 310,
                 child: Text(
-                  "新規登録",
+                  "ログイン",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
                       fontSize: 18),
                 ),
-                onPressed: () {},
+                onPressed: () => Provider.of<SignInViewModel>(
+                  context,
+                  listen: false,
+                ).onPressedSignIn(
+                  context: context,
+                ),
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "アカウントをお持ちでなければ ",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal),
+              ),
+              TextButton(
+                onPressed: () => Provider.of<SignInViewModel>(
+                  context,
+                  listen: false,
+                ).onPressedSignUpScreen(
+                  context: context,
+                ),
+                child: Text(
+                  "新規登録",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
