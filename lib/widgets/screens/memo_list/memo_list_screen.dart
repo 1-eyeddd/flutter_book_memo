@@ -28,7 +28,6 @@ class _MemoListScreenState extends State<MemoListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.brown.shade300,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.delete),
@@ -145,7 +144,6 @@ class _MemoListScreenState extends State<MemoListScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.brown.shade200,
         onPressed: () => Provider.of<MemoListViewModel>(context, listen: false)
             .onTapFloatingActionButtonMemo(
           context: context,

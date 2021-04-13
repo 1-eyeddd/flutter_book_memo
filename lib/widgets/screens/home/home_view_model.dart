@@ -3,6 +3,7 @@ import 'package:flutter_portfolio/models/dao/books/book_dao.dart';
 import 'package:flutter_portfolio/models/entity/book.dart';
 import 'package:flutter_portfolio/widgets/screens/add_book/add_book_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_list/memo_list_screen.dart';
+import 'package:flutter_portfolio/widgets/screens/my_page/my_page_screen.dart';
 
 class HomeViewModel extends ChangeNotifier {
   // 画面の状態
@@ -58,6 +59,18 @@ class HomeViewModel extends ChangeNotifier {
       MaterialPageRoute(
         builder: (context) => AddBookScreen(),
         fullscreenDialog: true,
+      ),
+    );
+  }
+
+  //マイページへ遷移
+  void onPressdMyPage({
+    @required BuildContext context,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyPageScreen(),
       ),
     );
   }

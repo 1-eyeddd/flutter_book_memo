@@ -20,8 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown.shade300,
         title: Text('本棚'),
+        leading: IconButton(
+          icon: Icon(Icons.account_circle),
+          onPressed: () =>
+              Provider.of<HomeViewModel>(context, listen: false).onPressdMyPage(
+            context: context,
+          ),
+        ),
       ),
       body: Consumer<HomeViewModel>(
         builder: (BuildContext context, HomeViewModel value, Widget child) {
@@ -54,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.brown.shade200,
         onPressed: () => Provider.of<HomeViewModel>(context, listen: false)
             .onTapFloatingActionButton(context: context),
         child: Icon(Icons.add),

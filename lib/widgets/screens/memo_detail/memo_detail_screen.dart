@@ -34,7 +34,6 @@ class _MemoDetailScreenState extends State<MemoDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('メモ詳細'),
-        backgroundColor: Colors.brown.shade300,
         actions: [
           IconButton(
             icon: Icon(Icons.edit),

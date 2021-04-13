@@ -19,7 +19,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
     final _urlController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown.shade300,
         title: Text('本を追加'),
       ),
       body: Container(

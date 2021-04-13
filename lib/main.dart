@@ -6,8 +6,10 @@ import 'package:flutter_portfolio/widgets/screens/edit_memo/edit_memo_view_model
 import 'package:flutter_portfolio/widgets/screens/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_portfolio/widgets/screens/home/home_view_model.dart';
+import 'package:flutter_portfolio/widgets/screens/login/login_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_detail/memo_detail_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_list/memo_list_view_model.dart';
+import 'package:flutter_portfolio/widgets/screens/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -34,6 +36,9 @@ class MyApp extends StatelessWidget {
             create: (_) => AddMemoViewModel()),
         ChangeNotifierProvider<AddBookViewModel>(
             create: (_) => AddBookViewModel()),
+        ChangeNotifierProvider<MyPageViewModel>(
+            create: (_) => MyPageViewModel()),
+        ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

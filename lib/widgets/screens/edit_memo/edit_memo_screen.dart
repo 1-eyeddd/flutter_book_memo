@@ -22,7 +22,6 @@ class EditMemoScreen extends StatelessWidget {
     _textController.text = memo;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown.shade300,
         title: Text('メモを編集'),
       ),
       body: Center(
@@ -58,7 +57,6 @@ class EditMemoScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown.shade300,
                     onPrimary: Colors.white,
                   ),
                   child: const Text('メモを更新する'),

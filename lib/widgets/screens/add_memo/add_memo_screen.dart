@@ -12,7 +12,6 @@ class AddMemoScreen extends StatelessWidget {
     final _textController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown.shade300,
         title: Text(
           'メモを追加',
         ),
@@ -51,7 +50,6 @@ class AddMemoScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 15),
                 child: new ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.brown.shade300,
                     onPrimary: Colors.white,
                   ),
                   child: const Text('メモを追加する'),
