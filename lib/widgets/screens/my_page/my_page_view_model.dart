@@ -44,5 +44,6 @@ class MyPageViewModel extends ChangeNotifier {
         _users = users;
       },
     );
+    notifyListeners();
   }
 }

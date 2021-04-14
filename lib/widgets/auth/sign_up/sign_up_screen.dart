@@ -3,11 +3,15 @@ import 'package:flutter_portfolio/widgets/auth/sign_up/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
+  SignUpScreen({Key key}) : super(key: key);
   @override
   _SignUpScreenScreenState createState() => _SignUpScreenScreenState();
 }
 
 class _SignUpScreenScreenState extends State<SignUpScreen> {
+  final _emailFormkey = GlobalKey<FormState>();
+  final _passwordFormkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,27 +67,40 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
           SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Material(
-              elevation: 2.0,
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              child: TextFormField(
-                controller:
-                    Provider.of<SignUpViewModel>(context).emailController,
-                decoration: InputDecoration(
-                  hintText: "Email",
-                  prefixIcon: Material(
-                    elevation: 0,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    child: Icon(
-                      Icons.email,
-                      color: Colors.lightBlue,
+          Form(
+            key: _emailFormkey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              child: Material(
+                elevation: 2.0,
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                child: TextFormField(
+                  controller:
+                      Provider.of<SignUpViewModel>(context).emailController,
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    prefixIcon: Material(
+                      elevation: 0,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      child: Icon(
+                        Icons.email,
+                        color: Colors.lightBlue,
+                      ),
                     ),
+                    border: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13),
                   ),
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 25, vertical: 13),
+                  validator: (text) =>
+                      Provider.of<SignUpViewModel>(context, listen: false)
+                          .createValidatorText(
+                    inputText: text,
+                    type: SignUpTextFieldValidateType.email,
+                  ),
+                  onSaved: (value) {
+                    Provider.of<SignUpViewModel>(context).emailController.text =
+                        value;
+                  },
                 ),
               ),
             ),
@@ -91,35 +108,60 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
           SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Material(
-              elevation: 2.0,
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              child: TextFormField(
-                controller:
-                    Provider.of<SignUpViewModel>(context).passwordController,
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  prefixIcon: Material(
-                    elevation: 0,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    child: Icon(
-                      Icons.lock,
-                      color: Colors.lightBlue,
+          Form(
+            key: _passwordFormkey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              child: Material(
+                elevation: 2.0,
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                child: TextFormField(
+                  controller:
+                      Provider.of<SignUpViewModel>(context).passwordController,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    prefixIcon: Material(
+                      elevation: 0,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      child: Icon(
+                        Icons.lock,
+                        color: Colors.lightBlue,
+                      ),
                     ),
+                    border: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13),
                   ),
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 25, vertical: 13),
+                  obscureText: true,
+                  validator: (text) =>
+                      Provider.of<SignUpViewModel>(context, listen: false)
+                          .createValidatorText(
+                    inputText: text,
+                    type: SignUpTextFieldValidateType.password,
+                  ),
+                  onSaved: (value) {
+                    Provider.of<SignUpViewModel>(context)
+                        .passwordController
+                        .text = value;
+                  },
                 ),
-                obscureText: true,
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          Consumer<SignUpViewModel>(builder:
+              (BuildContext context, SignUpViewModel value, Widget child) {
+            if (value.signUpErrorString.isNotEmpty) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                ),
+                child: Text(value.signUpErrorString),
+              );
+            }
+            return SizedBox(
+              height: 25,
+            );
+          }),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: Container(
@@ -135,12 +177,23 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
                       fontWeight: FontWeight.w700,
                       fontSize: 18),
                 ),
-                onPressed: () => Provider.of<SignUpViewModel>(
-                  context,
-                  listen: false,
-                ).onPressedSignUp(
-                  context: context,
-                ),
+                onPressed: () {
+                  final isEmailValue = _emailFormkey.currentState.validate();
+                  final isPasswordValue =
+                      _passwordFormkey.currentState.validate();
+                  if (isEmailValue && isPasswordValue) {
+                    Provider.of<SignUpViewModel>(
+                      context,
+                      listen: false,
+                    ).onPressedSignUp(
+                      context: context,
+                    );
+                  } else {
+                    setState(
+                      () {},
+                    );
+                  }
+                },
               ),
             ),
           ),

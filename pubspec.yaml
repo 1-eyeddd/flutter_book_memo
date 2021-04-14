@@ -20,6 +20,7 @@ dependencies:
   # For Auth
   email_validator: ^1.0.6
   flushbar: ^1.10.4
+  tuple: ^1.0.3
 
 
   # For UI
