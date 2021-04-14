@@ -8,17 +8,18 @@ enum AddBookTextFieldValidateType {
 }
 
 class AddBookViewModel extends ChangeNotifier {
+  final textController = TextEditingController();
+  final urlController = TextEditingController();
+
   //タップして本が追加される
   void onPressdAddBook({
     @required BuildContext context,
-    @required String title,
-    @required String imageUrl,
   }) {
     final user = UserService.getUserInfo().uid;
     BookDao.addBook(
       userId: user,
-      title: title,
-      imageUrl: imageUrl,
+      title: textController.text,
+      imageUrl: urlController.text,
     );
     Navigator.of(context).pop();
   }

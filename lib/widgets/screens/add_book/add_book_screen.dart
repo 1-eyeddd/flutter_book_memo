@@ -11,12 +11,9 @@ class AddBookScreen extends StatefulWidget {
 
 class _AddBookScreenState extends State<AddBookScreen> {
   final _formkey = GlobalKey<FormState>();
-  var autoValidate = false;
 
   @override
   Widget build(BuildContext context) {
-    final _textController = TextEditingController();
-    final _urlController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text('本を追加'),
@@ -26,63 +23,76 @@ class _AddBookScreenState extends State<AddBookScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Form(
-              autovalidateMode: AutovalidateMode.always,
               key: _formkey,
               child: Column(
                 children: [
-                  Container(
-                    height: 100,
-                    child: TextFormField(
-                      controller: _textController,
-                      decoration: InputDecoration(
-                        hintText: '本のタイトル',
-                        border: OutlineInputBorder(),
-                        filled: true,
-                        errorStyle: TextStyle(fontSize: 15),
-                      ),
-                      validator: (text) =>
-                          Provider.of<AddBookViewModel>(context, listen: false)
-                              .createValidatorText(
-                        inputText: text,
-                        type: AddBookTextFieldValidateType.title,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 15.0,
+                      left: 15.0,
+                    ),
+                    child: Container(
+                      height: 100,
+                      child: TextFormField(
+                        controller: Provider.of<AddBookViewModel>(context)
+                            .textController,
+                        decoration: InputDecoration(
+                          hintText: '本のタイトル',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          errorStyle: TextStyle(fontSize: 15),
+                        ),
+                        validator: (text) => Provider.of<AddBookViewModel>(
+                                context,
+                                listen: false)
+                            .createValidatorText(
+                          inputText: text,
+                          type: AddBookTextFieldValidateType.title,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 100,
-                    child: TextFormField(
-                      controller: _urlController,
-                      decoration: InputDecoration(
-                        hintText: '本の写真のURL',
-                        border: OutlineInputBorder(),
-                        filled: true,
-                        errorStyle: TextStyle(fontSize: 15),
-                      ),
-                      validator: (text) =>
-                          Provider.of<AddBookViewModel>(context, listen: false)
-                              .createValidatorText(
-                        inputText: text,
-                        type: AddBookTextFieldValidateType.imageUrl,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 15.0,
+                      left: 15.0,
+                    ),
+                    child: Container(
+                      height: 100,
+                      child: TextFormField(
+                        controller: Provider.of<AddBookViewModel>(context)
+                            .urlController,
+                        decoration: InputDecoration(
+                          hintText: '本の写真のURL',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          errorStyle: TextStyle(fontSize: 15),
+                        ),
+                        validator: (text) => Provider.of<AddBookViewModel>(
+                                context,
+                                listen: false)
+                            .createValidatorText(
+                          inputText: text,
+                          type: AddBookTextFieldValidateType.imageUrl,
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: TextButton(
+                      // TODO: ViewModelにかく
                       onPressed: () {
                         final isValue = _formkey.currentState.validate();
                         if (isValue) {
                           Provider.of<AddBookViewModel>(context, listen: false)
                               .onPressdAddBook(
                             context: context,
-                            title: _textController.text,
-                            imageUrl: _urlController.text,
                           );
                         } else {
+                          // TODO 使わない
                           setState(
-                            () {
-                              autoValidate = true;
-                            },
+                            () {},
                           );
                         }
                       },

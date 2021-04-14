@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/widgets/auth/sign_in/sign_in_view_model.dart';
-import 'package:flutter_portfolio/widgets/auth/sign_up/sign_up_view_model.dart';
-
+import 'package:flutter_portfolio/widgets/screens/sign_in/sign_in_view_model.dart';
 import 'package:provider/provider.dart';
+
+// TODO: Statelessで良い
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key key}) : super(key: key);
@@ -12,6 +12,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  // TODO: ViewModelでかく
   final _emailFormkey = GlobalKey<FormState>();
   final _passwordFormkey = GlobalKey<FormState>();
 
@@ -19,26 +20,25 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
+      body: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 18),
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    "Welcome!",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30.0,
-                    ),
+          SizedBox(height: 10),
+          Center(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  "Welcome!",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 30.0,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Container(
             child: Image.asset('images/login_page.png'),
+            height: 250,
           ),
           Form(
             key: _emailFormkey,
@@ -71,17 +71,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     inputText: text,
                     type: SignInTextFieldValidateType.email,
                   ),
-                  onSaved: (value) {
-                    Provider.of<SignInViewModel>(context).emailController.text =
-                        value;
-                  },
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           Form(
             key: _passwordFormkey,
             child: Padding(
@@ -113,11 +107,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     inputText: text,
                     type: SignInTextFieldValidateType.password,
                   ),
-                  onSaved: (value) {
-                    Provider.of<SignInViewModel>(context)
-                        .passwordController
-                        .text = value;
-                  },
                 ),
               ),
             ),
@@ -129,7 +118,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
                 ),
-                child: Text(value.signInErrorString),
+                child: Center(
+                  child: Text(value.signInErrorString),
+                ),
               );
             }
             return SizedBox(
@@ -143,6 +134,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                   color: Colors.lightBlue),
               child: FlatButton(
+                minWidth: 310,
                 child: Text(
                   "ログイン",
                   style: TextStyle(
@@ -150,6 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       fontWeight: FontWeight.w700,
                       fontSize: 18),
                 ),
+                // TODO: ViewModelにかこう
                 onPressed: () {
                   final isEmailValue = _emailFormkey.currentState.validate();
                   final isPasswordValue =

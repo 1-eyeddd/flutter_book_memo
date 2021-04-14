@@ -1,9 +1,7 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/dao/users/user_dao.dart';
 import 'package:flutter_portfolio/models/service/user_service.dart';
-import 'package:tuple/tuple.dart';
 
 enum SignUpTextFieldValidateType {
   email,
@@ -11,6 +9,9 @@ enum SignUpTextFieldValidateType {
 }
 
 class SignUpViewModel extends ChangeNotifier {
+  final _emailFormkey = GlobalKey<FormState>();
+  final _passwordFormkey = GlobalKey<FormState>();
+
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -69,5 +70,12 @@ class SignUpViewModel extends ChangeNotifier {
       }
       return null;
     }
+  }
+
+  //popした際にTextFieldの中をリセット
+  void resetTextField() {
+    nameController.text = '';
+    emailController.text = '';
+    passwordController.text = '';
   }
 }

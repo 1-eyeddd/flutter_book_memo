@@ -7,8 +7,11 @@ import 'package:provider/provider.dart';
 class MemoListScreen extends StatefulWidget {
   final String bookId;
   final String title;
-  MemoListScreen({Key key, @required this.bookId, this.title})
-      : super(key: key);
+  MemoListScreen({
+    Key key,
+    @required this.bookId,
+    this.title,
+  }) : super(key: key);
 
   @override
   _MemoListScreenState createState() => _MemoListScreenState();
@@ -40,8 +43,9 @@ class _MemoListScreenState extends State<MemoListScreen> {
                     content: Text('この本を本当に削除しますか？'),
                     actions: <Widget>[
                       TextButton(
-                          child: Text('Cancel'),
-                          onPressed: () => Navigator.of(context).pop(0)),
+                        child: Text('Cancel'),
+                        onPressed: () => Navigator.of(context).pop(0),
+                      ),
                       TextButton(
                         child: Text('OK'),
                         onPressed: () => Provider.of<MemoListViewModel>(
@@ -61,7 +65,11 @@ class _MemoListScreenState extends State<MemoListScreen> {
         ],
       ),
       body: Consumer<MemoListViewModel>(
-        builder: (BuildContext context, MemoListViewModel value, Widget child) {
+        builder: (
+          BuildContext context,
+          MemoListViewModel value,
+          Widget child,
+        ) {
           final memoList = value.memoList;
           if (memoList.isEmpty)
             return Padding(
@@ -69,14 +77,19 @@ class _MemoListScreenState extends State<MemoListScreen> {
               child: Center(
                 child: Column(
                   children: [
-                    Icon(Icons.auto_stories,
-                        size: 160, color: Colors.blueGrey.shade100),
+                    Icon(
+                      Icons.auto_stories,
+                      size: 160,
+                      color: Colors.blueGrey.shade100,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         'まだメモがありません',
                         style: TextStyle(
-                            fontSize: 17, color: Colors.blueGrey.shade200),
+                          fontSize: 17,
+                          color: Colors.blueGrey.shade200,
+                        ),
                       ),
                     )
                   ],

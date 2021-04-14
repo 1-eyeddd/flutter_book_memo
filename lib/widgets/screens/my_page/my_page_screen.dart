@@ -41,7 +41,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 6.0),
                       child: Text(
-                        users.userName,
+                        users.userName ?? '',
                         style: TextStyle(fontSize: 20.0),
                       ),
                     ),
@@ -61,8 +61,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
               Divider(),
               Container(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(right: 100, left: 100, top: 20),
+                  padding: const EdgeInsets.only(
+                    right: 100,
+                    left: 100,
+                    top: 20,
+                  ),
                   child: new ElevatedButton(
                     child: const Text('ログアウト'),
                     onPressed: () => Provider.of<MyPageViewModel>(

@@ -38,14 +38,19 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Center(
                 child: Column(
                   children: [
-                    Icon(Icons.auto_stories,
-                        size: 160, color: Colors.blueGrey.shade100),
+                    Icon(
+                      Icons.auto_stories,
+                      size: 160,
+                      color: Colors.blueGrey.shade100,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         'まだ本は登録されていません。',
                         style: TextStyle(
-                            fontSize: 17, color: Colors.blueGrey.shade200),
+                          fontSize: 17,
+                          color: Colors.blueGrey.shade200,
+                        ),
                       ),
                     )
                   ],

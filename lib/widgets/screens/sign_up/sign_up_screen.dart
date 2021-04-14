@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/widgets/auth/sign_up/sign_up_view_model.dart';
+import 'package:flutter_portfolio/widgets/screens/sign_up/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
+import '../../../main.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key key}) : super(key: key);
@@ -8,16 +9,37 @@ class SignUpScreen extends StatefulWidget {
   _SignUpScreenScreenState createState() => _SignUpScreenScreenState();
 }
 
-class _SignUpScreenScreenState extends State<SignUpScreen> {
+class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
+  // TODO:　ViewModelに
   final _emailFormkey = GlobalKey<FormState>();
   final _passwordFormkey = GlobalKey<FormState>();
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  void didPop() {
+    Provider.of<SignUpViewModel>(context, listen: false).resetTextField();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.blueGrey),
+      ),
       backgroundColor: Colors.white,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Column(
             children: <Widget>[
@@ -25,19 +47,16 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
                 "アカウントを作成する",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 26.0,
+                  fontSize: 24.0,
                 ),
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Container(
-              child: Image.asset('images/sign_up.png'),
+          Container(
+            child: Image.asset(
+              'images/sign_up.png',
+              height: 200,
             ),
-          ),
-          SizedBox(
-            height: 20,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
@@ -64,9 +83,7 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 10),
           Form(
             key: _emailFormkey,
             child: Padding(
@@ -106,7 +123,7 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Form(
             key: _passwordFormkey,
@@ -155,7 +172,9 @@ class _SignUpScreenScreenState extends State<SignUpScreen> {
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
                 ),
-                child: Text(value.signUpErrorString),
+                child: Center(
+                  child: Text(value.signUpErrorString),
+                ),
               );
             }
             return SizedBox(

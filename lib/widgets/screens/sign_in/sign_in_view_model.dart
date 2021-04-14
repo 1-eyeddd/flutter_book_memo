@@ -1,8 +1,7 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/service/user_service.dart';
-import 'package:flutter_portfolio/widgets/auth/sign_up/sign_up_screen.dart';
+import 'package:flutter_portfolio/widgets/screens/sign_up/sign_up_screen.dart';
 
 enum SignInTextFieldValidateType {
   email,
@@ -16,8 +15,6 @@ class SignInViewModel extends ChangeNotifier {
   String _signInErrorString = '';
 
   String get signInErrorString => _signInErrorString;
-
-  final formKey = new GlobalKey<FormState>();
 
   //サインイン
   void onPressedSignIn({

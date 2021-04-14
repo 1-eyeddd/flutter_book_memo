@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/service/user_service.dart';
-import 'package:flutter_portfolio/widgets/auth/sign_in/sign_in_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/home/home_screen.dart';
+import 'package:flutter_portfolio/widgets/screens/sign_in/sign_in_screen.dart';
 
 class AuthCheck extends StatelessWidget {
   @override

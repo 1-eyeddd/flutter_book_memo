@@ -5,7 +5,11 @@ import 'add_memo_view_model.dart';
 class AddMemoScreen extends StatelessWidget {
   final String bookId;
   final String title;
-  AddMemoScreen({Key key, @required this.bookId, this.title}) : super(key: key);
+  AddMemoScreen({
+    Key key,
+    @required this.bookId,
+    this.title,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

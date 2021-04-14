@@ -9,6 +9,10 @@ class MyPageViewModel extends ChangeNotifier {
 
   String get email => _email;
 
+  Users _users;
+
+  Users get users => _users;
+
   //サインアウトする
   Future<void> onPressedSignOut({
     @required BuildContext context,
@@ -26,10 +30,6 @@ class MyPageViewModel extends ChangeNotifier {
     }
   }
 
-  Users _users;
-
-  Users get users => _users;
-
   //ユーザー情報をfirestoreから取得
   void userNameListener() {
     final user = UserService.getUserInfo().uid;
@@ -42,8 +42,8 @@ class MyPageViewModel extends ChangeNotifier {
           userName: userNameData,
         );
         _users = users;
+        notifyListeners();
       },
     );
-    notifyListeners();
   }
 }
