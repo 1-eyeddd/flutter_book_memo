@@ -25,6 +25,8 @@ class AddBookViewModel extends ChangeNotifier {
           title: textController.text,
           imageUrl: urlController.text,
         );
+        textController.text = "";
+        urlController.text = "";
         Navigator.of(context).pop();
       }
     }

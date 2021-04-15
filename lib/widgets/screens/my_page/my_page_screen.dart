@@ -26,59 +26,61 @@ class _MyPageScreenState extends State<MyPageScreen> {
         builder: (BuildContext context, MyPageViewModel value, Widget child) {
           final email = value.email;
           final users = value.users;
-          return ListView(
-            children: <Widget>[
-              Container(
-                height: 200,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          return users == null
+              ? Container()
+              : ListView(
                   children: <Widget>[
-                    Icon(
-                      Icons.account_circle_rounded,
-                      size: 120,
+                    Container(
+                      height: 200,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.account_circle_rounded,
+                            size: 120,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6.0),
+                            child: Text(
+                              users.userName ?? '',
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6.0),
-                      child: Text(
-                        users.userName ?? '',
-                        style: TextStyle(fontSize: 20.0),
+                    ListTile(
+                      title: Text(
+                        "email",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      subtitle: Text(
+                        email,
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                    Divider(),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          right: 100,
+                          left: 100,
+                          top: 20,
+                        ),
+                        child: new ElevatedButton(
+                          child: const Text('ログアウト'),
+                          onPressed: () => Provider.of<MyPageViewModel>(
+                            context,
+                            listen: false,
+                          ).onPressedSignOut(
+                            context: context,
+                          ),
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  "email",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                subtitle: Text(
-                  email,
-                  style: TextStyle(fontSize: 18.0),
-                ),
-              ),
-              Divider(),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    right: 100,
-                    left: 100,
-                    top: 20,
-                  ),
-                  child: new ElevatedButton(
-                    child: const Text('ログアウト'),
-                    onPressed: () => Provider.of<MyPageViewModel>(
-                      context,
-                      listen: false,
-                    ).onPressedSignOut(
-                      context: context,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
+                );
         },
       ),
     );
