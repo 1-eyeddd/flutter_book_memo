@@ -76,6 +76,7 @@ class _EditMemoScreenState extends State<EditMemoScreen> {
                     context: context,
                     bookId: widget.bookId,
                     memoId: widget.memoId,
+                    title: widget.title,
                   ),
                 ),
               ),

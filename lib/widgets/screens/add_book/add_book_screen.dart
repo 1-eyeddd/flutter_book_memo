@@ -2,16 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/widgets/screens/add_book/add_book_view_model.dart';
 import 'package:provider/provider.dart';
 
-class AddBookScreen extends StatefulWidget {
-  AddBookScreen({Key key}) : super(key: key);
-
-  @override
-  _AddBookScreenState createState() => _AddBookScreenState();
-}
-
-class _AddBookScreenState extends State<AddBookScreen> {
-  final _formkey = GlobalKey<FormState>();
-
+class AddBookScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +14,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Form(
-              key: _formkey,
+              key:
+                  Provider.of<AddBookViewModel>(context, listen: false).formkey,
               child: Column(
                 children: [
                   Padding(
@@ -81,21 +73,11 @@ class _AddBookScreenState extends State<AddBookScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      // TODO: ViewModelにかく
-                      onPressed: () {
-                        final isValue = _formkey.currentState.validate();
-                        if (isValue) {
+                      onPressed: () =>
                           Provider.of<AddBookViewModel>(context, listen: false)
                               .onPressdAddBook(
-                            context: context,
-                          );
-                        } else {
-                          // TODO 使わない
-                          setState(
-                            () {},
-                          );
-                        }
-                      },
+                        context: context,
+                      ),
                       child: Text(
                         '追加する',
                         style: TextStyle(

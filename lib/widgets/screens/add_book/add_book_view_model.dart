@@ -10,18 +10,24 @@ enum AddBookTextFieldValidateType {
 class AddBookViewModel extends ChangeNotifier {
   final textController = TextEditingController();
   final urlController = TextEditingController();
-
+  final formkey = GlobalKey<FormState>();
   //タップして本が追加される
+  //エラーがなければ
   void onPressdAddBook({
     @required BuildContext context,
   }) {
     final user = UserService.getUserInfo().uid;
-    BookDao.addBook(
-      userId: user,
-      title: textController.text,
-      imageUrl: urlController.text,
-    );
-    Navigator.of(context).pop();
+    final isValue = formkey.currentState.validate();
+    {
+      if (isValue) {
+        BookDao.addBook(
+          userId: user,
+          title: textController.text,
+          imageUrl: urlController.text,
+        );
+        Navigator.of(context).pop();
+      }
+    }
   }
 
   // テキストフィールドのvalidatorテキスト

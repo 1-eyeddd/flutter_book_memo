@@ -10,10 +10,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
-  // TODO:　ViewModelに
-  final _emailFormkey = GlobalKey<FormState>();
-  final _passwordFormkey = GlobalKey<FormState>();
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -85,7 +81,8 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
           ),
           SizedBox(height: 10),
           Form(
-            key: _emailFormkey,
+            key: Provider.of<SignUpViewModel>(context, listen: false)
+                .emailFormkey,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Material(
@@ -126,7 +123,8 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
             height: 10,
           ),
           Form(
-            key: _passwordFormkey,
+            key: Provider.of<SignUpViewModel>(context, listen: false)
+                .passwordFormkey,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Material(
@@ -197,21 +195,12 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
                       fontSize: 18),
                 ),
                 onPressed: () {
-                  final isEmailValue = _emailFormkey.currentState.validate();
-                  final isPasswordValue =
-                      _passwordFormkey.currentState.validate();
-                  if (isEmailValue && isPasswordValue) {
-                    Provider.of<SignUpViewModel>(
-                      context,
-                      listen: false,
-                    ).onPressedSignUp(
-                      context: context,
-                    );
-                  } else {
-                    setState(
-                      () {},
-                    );
-                  }
+                  Provider.of<SignUpViewModel>(
+                    context,
+                    listen: false,
+                  ).onPressedSignUp(
+                    context: context,
+                  );
                 },
               ),
             ),

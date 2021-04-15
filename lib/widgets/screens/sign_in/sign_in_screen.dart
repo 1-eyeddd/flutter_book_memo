@@ -2,27 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/widgets/screens/sign_in/sign_in_view_model.dart';
 import 'package:provider/provider.dart';
 
-// TODO: Statelessで良い
-
-class SignInScreen extends StatefulWidget {
-  SignInScreen({Key key}) : super(key: key);
-
-  @override
-  _SignInScreenState createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  // TODO: ViewModelでかく
-  final _emailFormkey = GlobalKey<FormState>();
-  final _passwordFormkey = GlobalKey<FormState>();
-
+class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          SizedBox(height: 10),
+          SizedBox(height: 50),
           Center(
             child: Column(
               children: <Widget>[
@@ -41,7 +28,8 @@ class _SignInScreenState extends State<SignInScreen> {
             height: 250,
           ),
           Form(
-            key: _emailFormkey,
+            key: Provider.of<SignInViewModel>(context, listen: false)
+                .emailFormkey,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Material(
@@ -77,7 +65,8 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           SizedBox(height: 20),
           Form(
-            key: _passwordFormkey,
+            key: Provider.of<SignInViewModel>(context, listen: false)
+                .passwordFormkey,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Material(
@@ -142,24 +131,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       fontWeight: FontWeight.w700,
                       fontSize: 18),
                 ),
-                // TODO: ViewModelにかこう
-                onPressed: () {
-                  final isEmailValue = _emailFormkey.currentState.validate();
-                  final isPasswordValue =
-                      _passwordFormkey.currentState.validate();
-                  if (isEmailValue && isPasswordValue) {
-                    Provider.of<SignInViewModel>(
-                      context,
-                      listen: false,
-                    ).onPressedSignIn(
-                      context: context,
-                    );
-                  } else {
-                    setState(
-                      () {},
-                    );
-                  }
-                },
+                onPressed: () => Provider.of<SignInViewModel>(
+                  context,
+                  listen: false,
+                ).onPressedSignIn(
+                  context: context,
+                ),
               ),
             ),
           ),

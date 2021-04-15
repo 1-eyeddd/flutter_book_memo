@@ -9,8 +9,8 @@ enum SignUpTextFieldValidateType {
 }
 
 class SignUpViewModel extends ChangeNotifier {
-  final _emailFormkey = GlobalKey<FormState>();
-  final _passwordFormkey = GlobalKey<FormState>();
+  final emailFormkey = GlobalKey<FormState>();
+  final passwordFormkey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -24,6 +24,9 @@ class SignUpViewModel extends ChangeNotifier {
   void onPressedSignUp({
     @required BuildContext context,
   }) async {
+    final isEmailValue = emailFormkey.currentState.validate();
+    final isPasswordValue = passwordFormkey.currentState.validate();
+
     final tuple = await UserService.signUp(
       email: emailController.text,
       password: passwordController.text,
@@ -39,14 +42,16 @@ class SignUpViewModel extends ChangeNotifier {
         _signUpErrorString = '';
         emailController.text = '';
         passwordController.text = '';
-        await UserDao.addUser(
-          userName: nameController.text,
-          uid: userCredential.user.uid,
-        );
-        notifyListeners();
-        //AuthCheckに戻り、認証済みか確認する
-        Navigator.of(context).pop();
-        return;
+        if (isEmailValue && isPasswordValue) {
+          await UserDao.addUser(
+            userName: nameController.text,
+            uid: userCredential.user.uid,
+          );
+          notifyListeners();
+          //AuthCheckに戻り、認証済みか確認する
+          Navigator.of(context).pop();
+          return;
+        }
     }
   }
 
