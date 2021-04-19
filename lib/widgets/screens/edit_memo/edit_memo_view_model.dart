@@ -5,9 +5,9 @@ import 'package:flutter_portfolio/util/local_notification.dart';
 
 class EditMemoViewModel extends ChangeNotifier {
   final textController = TextEditingController();
-
-  //メモのオンオフ
   bool switchControl = true;
+
+  //通知スイッチのオンオフ
   void toggleSwitch(bool value) {
     if (switchControl == true) {
       switchControl = false;
