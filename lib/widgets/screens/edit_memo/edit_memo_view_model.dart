@@ -6,6 +6,16 @@ import 'package:flutter_portfolio/util/local_notification.dart';
 class EditMemoViewModel extends ChangeNotifier {
   final textController = TextEditingController();
 
+  //メモのオンオフ
+  bool switchControl = true;
+  void toggleSwitch(bool value) {
+    if (switchControl == true) {
+      switchControl = false;
+    } else {
+      switchControl = true;
+    }
+  }
+
   // 更新ボタンをタップ
   void onPressdEditMemo({
     @required BuildContext context,
@@ -18,10 +28,12 @@ class EditMemoViewModel extends ChangeNotifier {
       bookId: bookId,
       newMemo: textController.text,
     );
-    await LocalNotification.scheduleAlarm(
-      memo: textController.text,
-      title: title,
-    );
+    if (switchControl == true) {
+      await LocalNotification.scheduleAlarm(
+        memo: textController.text,
+        title: title,
+      );
+    }
     //メモ一覧に戻るため
     Navigator.of(context).pop();
     Navigator.of(context).pop();

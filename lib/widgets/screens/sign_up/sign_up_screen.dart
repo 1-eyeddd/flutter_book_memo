@@ -22,6 +22,7 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
     super.dispose();
   }
 
+  // この画面からpopする場合に呼ばれる
   void didPop() {
     Provider.of<SignUpViewModel>(context, listen: false).resetTextField();
   }

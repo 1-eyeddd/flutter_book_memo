@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'add_memo_view_model.dart';
 
-class AddMemoScreen extends StatelessWidget {
+class AddMemoScreen extends StatefulWidget {
   final String bookId;
   final String title;
   AddMemoScreen({
@@ -10,6 +10,12 @@ class AddMemoScreen extends StatelessWidget {
     @required this.bookId,
     this.title,
   }) : super(key: key);
+
+  @override
+  _AddMemoScreenState createState() => _AddMemoScreenState();
+}
+
+class _AddMemoScreenState extends State<AddMemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,16 +47,31 @@ class AddMemoScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              '24時間後にメモがリマインドされます！',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.blueGrey.shade400,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '24時間後にメモをリマインドする',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueGrey.shade400,
+                  ),
+                ),
+                Switch(
+                  value: Provider.of<AddMemoViewModel>(context, listen: false)
+                      .switchControl,
+                  onChanged: (bool value) {
+                    setState(() {
+                      Provider.of<AddMemoViewModel>(context, listen: false)
+                          .toggleSwitch(value);
+                    });
+                  },
+                )
+              ],
             ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 5),
                 child: new ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     onPrimary: Colors.white,
@@ -61,8 +82,8 @@ class AddMemoScreen extends StatelessWidget {
                     listen: false,
                   ).onPressedAddMemo(
                     context: context,
-                    bookId: bookId,
-                    title: title,
+                    bookId: widget.bookId,
+                    title: widget.title,
                   ),
                 ),
               ),

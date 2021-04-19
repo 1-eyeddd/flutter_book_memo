@@ -55,16 +55,31 @@ class _EditMemoScreenState extends State<EditMemoScreen> {
                 ),
               ),
             ),
-            Text(
-              '24時間後にメモがリマインドされます！',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.blueGrey.shade400,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '24時間後にメモをリマインドする',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueGrey.shade400,
+                  ),
+                ),
+                Switch(
+                  value: Provider.of<EditMemoViewModel>(context, listen: false)
+                      .switchControl,
+                  onChanged: (bool value) {
+                    setState(() {
+                      Provider.of<EditMemoViewModel>(context, listen: false)
+                          .toggleSwitch(value);
+                    });
+                  },
+                )
+              ],
             ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     onPrimary: Colors.white,
