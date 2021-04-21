@@ -32,7 +32,9 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.blueGrey),
+        iconTheme: IconThemeData(
+          color: Colors.blueGrey,
+        ),
       ),
       backgroundColor: Colors.white,
       body: Column(
@@ -118,9 +120,7 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
               ),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Form(
             key: Provider.of<SignUpViewModel>(context, listen: false)
                 .passwordFormkey,
@@ -162,28 +162,29 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
               ),
             ),
           ),
-          Consumer<SignUpViewModel>(builder:
-              (BuildContext context, SignUpViewModel value, Widget child) {
-            if (value.signUpErrorString.isNotEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                ),
-                child: Center(
-                  child: Text(value.signUpErrorString),
-                ),
-              );
-            }
-            return SizedBox(
-              height: 25,
-            );
-          }),
+          Consumer<SignUpViewModel>(
+            builder:
+                (BuildContext context, SignUpViewModel value, Widget child) {
+              if (value.signUpErrorString.isNotEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                  ),
+                  child: Center(
+                    child: Text(value.signUpErrorString),
+                  ),
+                );
+              }
+              return SizedBox(height: 25);
+            },
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                  color: Colors.lightBlue),
+                borderRadius: BorderRadius.all(Radius.circular(100)),
+                color: Colors.lightBlue,
+              ),
               child: FlatButton(
                 minWidth: 310,
                 child: Text(

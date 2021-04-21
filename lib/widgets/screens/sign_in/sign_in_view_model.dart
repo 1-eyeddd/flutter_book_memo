@@ -16,7 +16,6 @@ class SignInViewModel extends ChangeNotifier {
   final passwordController = TextEditingController();
 
   String _signInErrorString = '';
-
   String get signInErrorString => _signInErrorString;
 
   //サインイン
@@ -25,6 +24,7 @@ class SignInViewModel extends ChangeNotifier {
   }) async {
     final isEmailValue = emailFormkey.currentState.validate();
     final isPasswordValue = passwordFormkey.currentState.validate();
+
     if (isEmailValue && isPasswordValue) {
       final signInErrorType = await UserService.signIn(
         email: emailController.text,

@@ -17,7 +17,6 @@ class SignUpViewModel extends ChangeNotifier {
   final passwordController = TextEditingController();
 
   String _signUpErrorString = '';
-
   String get signUpErrorString => _signUpErrorString;
 
   //新規登録ボタンで登録
@@ -33,6 +32,7 @@ class SignUpViewModel extends ChangeNotifier {
     );
     final userCredential = tuple.item1;
     final signUpErrorType = tuple.item2;
+
     switch (signUpErrorType) {
       case SignUpErrorType.alreadyEmail:
         _signUpErrorString = 'このメールアドレスは既に登録されています。';

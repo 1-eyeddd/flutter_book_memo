@@ -16,23 +16,25 @@ class HomeViewModel extends ChangeNotifier {
     final user = UserService.getUserInfo().uid;
     BookDao.booksListener(
       userId: user,
-    ).listen((snapshot) {
-      final books = snapshot.docs.map((document) {
-        final data = document.data();
-        final title = data['title'] as String ?? '';
-        final bookId = data['bookId'] as String ?? '';
-        final imageUrl = data['imageUrl'] as String ?? '';
-        final book = Book(
-          userId: user,
-          bookId: bookId,
-          title: title,
-          imageUrl: imageUrl,
-        );
-        return book;
-      }).toList();
-      _books = books;
-      notifyListeners();
-    });
+    ).listen(
+      (snapshot) {
+        final books = snapshot.docs.map((document) {
+          final data = document.data();
+          final title = data['title'] as String ?? '';
+          final bookId = data['bookId'] as String ?? '';
+          final imageUrl = data['imageUrl'] as String ?? '';
+          final book = Book(
+            userId: user,
+            bookId: bookId,
+            title: title,
+            imageUrl: imageUrl,
+          );
+          return book;
+        }).toList();
+        _books = books;
+        notifyListeners();
+      },
+    );
   }
 
 // 本の画像をタップしてメモ一覧へ

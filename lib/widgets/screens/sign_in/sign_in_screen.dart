@@ -101,22 +101,22 @@ class SignInScreen extends StatelessWidget {
               ),
             ),
           ),
-          Consumer<SignInViewModel>(builder:
-              (BuildContext context, SignInViewModel value, Widget child) {
-            if (value.signInErrorString.isNotEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                ),
-                child: Center(
-                  child: Text(value.signInErrorString),
-                ),
-              );
-            }
-            return SizedBox(
-              height: 25,
-            );
-          }),
+          Consumer<SignInViewModel>(
+            builder:
+                (BuildContext context, SignInViewModel value, Widget child) {
+              if (value.signInErrorString.isNotEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                  ),
+                  child: Center(
+                    child: Text(value.signInErrorString),
+                  ),
+                );
+              }
+              return SizedBox(height: 25);
+            },
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: Container(
@@ -141,9 +141,7 @@ class SignInScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

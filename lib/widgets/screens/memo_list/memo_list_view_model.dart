@@ -19,25 +19,27 @@ class MemoListViewModel extends ChangeNotifier {
     final user = UserService.getUserInfo().uid;
     MemoDao.memosListener(
       bookId: bookId,
-    ).listen((snapshot) {
-      final memoList = snapshot.docs.map((document) {
-        final data = document.data();
-        final bookId = data['bookId'] as String ?? '';
-        final memoId = data['memoId'] as String ?? '';
-        final memo = data['memo'] as String ?? '';
-        final createdAt = data['createdAt'] as Timestamp;
-        final memos = Memo(
-          bookId: bookId,
-          memoId: memoId,
-          memo: memo,
-          userId: user,
-          createdAt: createdAt,
-        );
-        return memos;
-      }).toList();
-      _memoList = memoList;
-      notifyListeners();
-    });
+    ).listen(
+      (snapshot) {
+        final memoList = snapshot.docs.map((document) {
+          final data = document.data();
+          final bookId = data['bookId'] as String ?? '';
+          final memoId = data['memoId'] as String ?? '';
+          final memo = data['memo'] as String ?? '';
+          final createdAt = data['createdAt'] as Timestamp;
+          final memos = Memo(
+            bookId: bookId,
+            memoId: memoId,
+            memo: memo,
+            userId: user,
+            createdAt: createdAt,
+          );
+          return memos;
+        }).toList();
+        _memoList = memoList;
+        notifyListeners();
+      },
+    );
   }
 
   //本を削除

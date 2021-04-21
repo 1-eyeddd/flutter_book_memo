@@ -60,7 +60,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
-                    Divider(),
                     Container(
                       child: Padding(
                         padding: const EdgeInsets.only(
