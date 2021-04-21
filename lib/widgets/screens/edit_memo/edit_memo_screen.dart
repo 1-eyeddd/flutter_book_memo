@@ -79,7 +79,7 @@ class _EditMemoScreenState extends State<EditMemoScreen> {
             ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     onPrimary: Colors.white,

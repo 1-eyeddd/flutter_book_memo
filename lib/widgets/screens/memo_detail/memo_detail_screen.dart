@@ -61,7 +61,7 @@ class _MemoDetailScreenState extends State<MemoDetailScreen> {
                           leading: Icon(Icons.delete, color: Colors.redAccent),
                           title: Text('削除'),
                           onTap: () async {
-                            await showDialog<int>(
+                            var result = await showDialog<int>(
                               context: context,
                               barrierDismissible: false,
                               builder: (BuildContext context) {
@@ -87,6 +87,7 @@ class _MemoDetailScreenState extends State<MemoDetailScreen> {
                                 );
                               },
                             );
+                            print('dialog result: $result');
                           },
                         )
                       ],

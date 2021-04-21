@@ -22,7 +22,6 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
     super.dispose();
   }
 
-  // この画面からpopする場合に呼ばれる
   void didPop() {
     Provider.of<SignUpViewModel>(context, listen: false).resetTextField();
   }
@@ -37,17 +36,16 @@ class _SignUpScreenScreenState extends State<SignUpScreen> with RouteAware {
       ),
       backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text(
-                "アカウントを作成する",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 24.0,
-                ),
+          Container(
+            child: Text(
+              "アカウントを作成する",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 24.0,
               ),
-            ],
+            ),
           ),
           Container(
             child: Image.asset(

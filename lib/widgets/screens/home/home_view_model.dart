@@ -19,7 +19,6 @@ class HomeViewModel extends ChangeNotifier {
     ).listen((snapshot) {
       final books = snapshot.docs.map((document) {
         final data = document.data();
-        print(data);
         final title = data['title'] as String ?? '';
         final bookId = data['bookId'] as String ?? '';
         final imageUrl = data['imageUrl'] as String ?? '';

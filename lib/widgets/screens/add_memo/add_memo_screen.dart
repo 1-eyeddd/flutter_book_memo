@@ -71,7 +71,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 15),
                 child: new ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     onPrimary: Colors.white,

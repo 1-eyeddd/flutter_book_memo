@@ -22,7 +22,6 @@ class MemoListViewModel extends ChangeNotifier {
     ).listen((snapshot) {
       final memoList = snapshot.docs.map((document) {
         final data = document.data();
-        print(data);
         final bookId = data['bookId'] as String ?? '';
         final memoId = data['memoId'] as String ?? '';
         final memo = data['memo'] as String ?? '';
