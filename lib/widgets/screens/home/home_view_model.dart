@@ -5,6 +5,7 @@ import 'package:flutter_portfolio/models/service/user_service.dart';
 import 'package:flutter_portfolio/widgets/screens/add_book/add_book_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_list/memo_list_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/my_page/my_page_screen.dart';
+import 'package:flutter_portfolio/widgets/screens/search_book_screen.dart';
 
 class HomeViewModel extends ChangeNotifier {
   List<Book> _books = <Book>[];
@@ -59,7 +60,7 @@ class HomeViewModel extends ChangeNotifier {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddBookScreen(),
+        builder: (context) => SearchBooksScreen(),
         fullscreenDialog: true,
       ),
     );
