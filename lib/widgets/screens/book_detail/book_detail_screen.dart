@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/entity/book.dart';
+import 'package:flutter_portfolio/widgets/screens/book_detail/book_detail_view_model.dart';
+import 'package:provider/provider.dart';
 
-class ViewBook extends StatelessWidget {
-  final Search book;
-  ViewBook(this.book);
+class BookDetailScreen extends StatelessWidget {
+  final Book bookDetail;
+  BookDetailScreen({
+    Key key,
+    @required this.bookDetail,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(book.title),
+        title: Text(bookDetail.title),
+        actions: <Widget>[
+          TextButton(
+            child: Text('追加'),
+            onPressed: () =>
+                Provider.of<BookDetailViewModel>(context, listen: false)
+                    .onPressedAddBook(
+              context: context,
+              bookDetail: bookDetail,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -17,12 +34,12 @@ class ViewBook extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Image.network(book.urlImage),
+                child: Image.network(bookDetail.imageUrl),
               ),
               Padding(
                 padding: EdgeInsets.all(8),
                 child: Text(
-                  '著者 ' + book.authors,
+                  '著者 ' + bookDetail.authors,
                   style: TextStyle(
                       fontSize: 20,
                       color: Theme.of(context).colorScheme.primary),
@@ -31,13 +48,13 @@ class ViewBook extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(8),
                 child: Text(
-                  '出版社: ' + book.authors,
+                  '出版社: ' + bookDetail.authors,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Text(book.descritpion),
+                child: Text(bookDetail.descritpion),
               ),
             ],
           ),

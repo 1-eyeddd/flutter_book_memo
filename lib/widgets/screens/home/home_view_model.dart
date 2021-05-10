@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/dao/books/book_dao.dart';
 import 'package:flutter_portfolio/models/entity/book.dart';
 import 'package:flutter_portfolio/models/service/user_service.dart';
-import 'package:flutter_portfolio/widgets/screens/add_book/add_book_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/memo_list/memo_list_screen.dart';
 import 'package:flutter_portfolio/widgets/screens/my_page/my_page_screen.dart';
-import 'package:flutter_portfolio/widgets/screens/search_book_screen.dart';
+import 'package:flutter_portfolio/widgets/screens/search_book/search_book_screen.dart';
 
 class HomeViewModel extends ChangeNotifier {
   List<Book> _books = <Book>[];
@@ -20,7 +19,6 @@ class HomeViewModel extends ChangeNotifier {
     ).listen((snapshot) {
       final books = snapshot.docs.map((document) {
         final data = document.data();
-        print(data);
         final title = data['title'] as String ?? '';
         final bookId = data['bookId'] as String ?? '';
         final imageUrl = data['imageUrl'] as String ?? '';
@@ -60,7 +58,7 @@ class HomeViewModel extends ChangeNotifier {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchBooksScreen(),
+        builder: (context) => SearchBookScreen(),
         fullscreenDialog: true,
       ),
     );

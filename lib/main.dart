@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/widgets/screens/search_book/search_book_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_portfolio/util/local_notification.dart';
@@ -45,6 +46,8 @@ class MyApp extends StatelessWidget {
             create: (_) => SignInViewModel()),
         ChangeNotifierProvider<SignUpViewModel>(
             create: (_) => SignUpViewModel()),
+        ChangeNotifierProvider<SearchBookViewModel>(
+            create: (_) => SearchBookViewModel()),
       ],
       child: MaterialApp(
         navigatorObservers: <NavigatorObserver>[routeObserver],
