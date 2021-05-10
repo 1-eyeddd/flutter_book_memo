@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/widgets/screens/add_book_detail/add_book_detail_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/search_book/search_book_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_portfolio/util/local_notification.dart';
 import 'package:flutter_portfolio/widgets/auth/auth_check.dart';
 import 'package:flutter_portfolio/widgets/screens/home/home_view_model.dart';
-import 'package:flutter_portfolio/widgets/screens/add_book/add_book_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/add_memo/add_memo_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/sign_in/sign_in_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/sign_up/sign_up_view_model.dart';
@@ -38,8 +38,6 @@ class MyApp extends StatelessWidget {
             create: (_) => EditMemoViewModel()),
         ChangeNotifierProvider<AddMemoViewModel>(
             create: (_) => AddMemoViewModel()),
-        ChangeNotifierProvider<AddBookViewModel>(
-            create: (_) => AddBookViewModel()),
         ChangeNotifierProvider<MyPageViewModel>(
             create: (_) => MyPageViewModel()),
         ChangeNotifierProvider<SignInViewModel>(
@@ -48,6 +46,8 @@ class MyApp extends StatelessWidget {
             create: (_) => SignUpViewModel()),
         ChangeNotifierProvider<SearchBookViewModel>(
             create: (_) => SearchBookViewModel()),
+        ChangeNotifierProvider<AddBookDetailViewModel>(
+            create: (_) => AddBookDetailViewModel()),
       ],
       child: MaterialApp(
         navigatorObservers: <NavigatorObserver>[routeObserver],

@@ -3,7 +3,8 @@ import 'package:flutter_portfolio/models/dao/books/book_dao.dart';
 import 'package:flutter_portfolio/models/entity/book.dart';
 import 'package:flutter_portfolio/models/service/user_service.dart';
 
-class BookDetailViewModel extends ChangeNotifier {
+class AddBookDetailViewModel extends ChangeNotifier {
+  //本を追加
   void onPressedAddBook({
     @required BuildContext context,
     @required Book bookDetail,

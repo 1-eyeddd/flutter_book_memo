@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/models/entity/book.dart';
-import 'package:flutter_portfolio/widgets/screens/book_detail/book_detail_view_model.dart';
+import 'package:flutter_portfolio/widgets/screens/add_book_detail/add_book_detail_view_model.dart';
 import 'package:provider/provider.dart';
 
-class BookDetailScreen extends StatelessWidget {
+class AddBookDetailScreen extends StatelessWidget {
   final Book bookDetail;
-  BookDetailScreen({
+  AddBookDetailScreen({
     Key key,
     @required this.bookDetail,
   }) : super(key: key);
@@ -16,10 +16,10 @@ class BookDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(bookDetail.title),
         actions: <Widget>[
-          TextButton(
+          FlatButton(
             child: Text('追加'),
             onPressed: () =>
-                Provider.of<BookDetailViewModel>(context, listen: false)
+                Provider.of<AddBookDetailViewModel>(context, listen: false)
                     .onPressedAddBook(
               context: context,
               bookDetail: bookDetail,
@@ -41,15 +41,19 @@ class BookDetailScreen extends StatelessWidget {
                 child: Text(
                   '著者 ' + bookDetail.authors,
                   style: TextStyle(
-                      fontSize: 20,
-                      color: Theme.of(context).colorScheme.primary),
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(8),
                 child: Text(
                   '出版社: ' + bookDetail.authors,
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[600],
+                  ),
                 ),
               ),
               Padding(
