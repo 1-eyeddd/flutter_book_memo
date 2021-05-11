@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/util/theme.dart';
 import 'package:provider/provider.dart';
 import 'home_view_model.dart';
 
@@ -17,17 +18,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<AppTheme>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('本棚'),
-        leading: IconButton(
-          icon: Icon(Icons.account_circle),
-          onPressed: () =>
-              Provider.of<HomeViewModel>(context, listen: false).onPressdMyPage(
-            context: context,
+          title: Text('本棚'),
+          leading: IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () => Provider.of<HomeViewModel>(context, listen: false)
+                .onPressdMyPage(
+              context: context,
+            ),
           ),
-        ),
-      ),
+          actions: [
+            Switch.adaptive(
+              value: theme.isDark,
+              onChanged: (_) {
+                theme.changeMode();
+              },
+            )
+          ]),
       body: Consumer<HomeViewModel>(
         builder: (BuildContext context, HomeViewModel value, Widget child) {
           // ViewModelのstateにアクセス

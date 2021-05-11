@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/util/theme.dart';
 import 'package:flutter_portfolio/widgets/screens/add_book_detail/add_book_detail_view_model.dart';
 import 'package:flutter_portfolio/widgets/screens/search_book/search_book_view_model.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,10 @@ void main() async {
   await Firebase.initializeApp();
   // 通知の初期設定
   await LocalNotification.initialize();
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => AppTheme(),
+    child: MyApp(),
+  ));
 }
 
 final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
@@ -52,9 +56,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         navigatorObservers: <NavigatorObserver>[routeObserver],
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: Provider.of<AppTheme>(context).buildTheme(),
         //ログインされているかチェック
         home: AuthCheck(),
       ),
