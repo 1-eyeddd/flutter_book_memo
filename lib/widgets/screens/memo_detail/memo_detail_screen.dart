@@ -46,6 +46,17 @@ class _MemoDetailScreenState extends State<MemoDetailScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
+                          leading: Icon(Icons.share, color: Colors.amber),
+                          title: Text('共有'),
+                          onTap: () => Provider.of<MemoDetailViewModel>(context,
+                                  listen: false)
+                              .onTapShareMemo(
+                            context: context,
+                            memo: widget.memo,
+                            title: widget.title,
+                          ),
+                        ),
+                        ListTile(
                           leading: Icon(Icons.edit, color: Colors.blueAccent),
                           title: Text('編集'),
                           onTap: () => Provider.of<MemoDetailViewModel>(context,

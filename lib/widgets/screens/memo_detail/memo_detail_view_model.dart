@@ -4,6 +4,7 @@ import 'package:flutter_portfolio/models/dao/memos/memo_dao.dart';
 import 'package:flutter_portfolio/models/entity/memo.dart';
 import 'package:flutter_portfolio/models/service/user_service.dart';
 import 'package:flutter_portfolio/widgets/screens/edit_memo/edit_memo_screen.dart';
+import 'package:share/share.dart';
 
 class MemoDetailViewModel extends ChangeNotifier {
   Memo _memo;
@@ -37,6 +38,16 @@ class MemoDetailViewModel extends ChangeNotifier {
         notifyListeners();
       },
     );
+  }
+
+  //メモの共有
+  void onTapShareMemo({
+    @required BuildContext context,
+    @required String memo,
+    @required String title,
+  }) async {
+    await Share.share('「' + title + 'のメモ」\n' + memo);
+    Navigator.of(context).pop();
   }
 
   //編集画面へ遷移
