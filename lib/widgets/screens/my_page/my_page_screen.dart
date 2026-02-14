@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/util/theme.dart';
 import 'package:flutter_portfolio/widgets/screens/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -58,6 +59,36 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       subtitle: Text(
                         email,
                         style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text(
+                        "本棚のカラム数",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      subtitle: Consumer<AppTheme>(
+                        builder: (context, theme, child) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${theme.columnCount}列",
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                              Slider(
+                                value: theme.columnCount.toDouble(),
+                                min: 2,
+                                max: 6,
+                                divisions: 4,
+                                label: "${theme.columnCount}列",
+                                onChanged: (double value) {
+                                  theme.setColumnCount(value.toInt());
+                                },
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                     Divider(),

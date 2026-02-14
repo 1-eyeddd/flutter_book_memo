@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return Container(
             child: GridView.count(
               padding: EdgeInsets.all(15.0),
-              crossAxisCount: 3,
+              crossAxisCount: theme.columnCount,
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0,
               childAspectRatio: 0.7,
